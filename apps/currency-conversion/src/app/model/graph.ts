@@ -5,7 +5,7 @@ export class Graph {
     this.adjacencyList = new Map();
   }
 
-  addVertex(vertex) {
+  addVertex(vertex: string) {
     if (!this.adjacencyList.get(vertex)) {
       this.adjacencyList.set(vertex, [])
     }

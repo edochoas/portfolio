@@ -1,14 +1,14 @@
-import { FileLoader } from './file-loader';
+import { JSONFileLoader } from './json-file-loader';
 
-describe('FileLoader', () => {
+describe('JSONFileLoader', () => {
   it('should be defined', () => {
-    expect(new FileLoader()).toBeDefined();
+    expect(new JSONFileLoader()).toBeDefined();
   });
 
   describe('load method', () => {
     it('should return a list of rules', () => {
-      const fileLoader = new FileLoader();
-      const rules = fileLoader.load();
+      const jsonLoader = new JSONFileLoader();
+      const rules = jsonLoader.load();
       expect(rules).toBeDefined();
       expect(rules.length).toBeGreaterThan(0);
     });

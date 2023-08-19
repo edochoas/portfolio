@@ -1,5 +1,5 @@
 export class Graph {
-  adjacencyList: Map<string, string[]>;
+  adjacencyList: Map<string, Map<string, number>>;
 
   constructor() {
     this.adjacencyList = new Map();
@@ -7,14 +7,14 @@ export class Graph {
 
   addVertex(vertex: string) {
     if (!this.adjacencyList.get(vertex)) {
-      this.adjacencyList.set(vertex, [])
+      this.adjacencyList.set(vertex, new Map());
     }
   }
 
-  addEdge(from, to) {
+  addEdge(from: string, to: string, weight = 1) {
     this.addVertex(from);
     this.addVertex(to);
-    this.adjacencyList.get(from).push(to);
+    this.adjacencyList.get(from).set(to, weight);
   }
 
   getNumberOfVertex() {

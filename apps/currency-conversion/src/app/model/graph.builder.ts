@@ -1,12 +1,15 @@
-import { ExchangeRule } from './exchange-rule';
+import { Inject, Injectable } from '@nestjs/common';
 import { Graph } from './graph';
 
+@Injectable()
 export class GraphBuilder {
-  fromJSON(data: ExchangeRule[]): Graph {
+  constructor(@Inject('RuleLoader') private ruleLoader) {}
+  build(): Graph {
+    const rules = this.ruleLoader.load();
     const graph = new Graph();
-    if (data !== undefined && data !== null && Array.isArray(data)) {
-      data.forEach(rule => {
-        graph.addEdge(rule.fromCurrencyCode, rule.toCurrencyCode);
+    if (Array.isArray(rules)) {
+      rules.forEach(rule => {
+        graph.addEdge(rule.fromCurrencyCode, rule.toCurrencyCode, rule.exchangeRate);
       });
     }
     return graph;

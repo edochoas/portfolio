@@ -3,9 +3,9 @@ import { RuleLoader } from "./rule-loader";
 import { join } from "path";
 import { readFileSync } from "fs";
 
-export class FileLoader  implements RuleLoader {
+export class JSONFileLoader  implements RuleLoader {
   load(): ExchangeRule[] {
-    const jsonPath = join(__dirname, '..', '..', 'assets', 'data.json');
+    const jsonPath = join(__dirname,  'assets', 'data.json');
     const jsonString = readFileSync(jsonPath, 'utf8');
     const rules = JSON.parse(jsonString);
     return rules;

@@ -2,10 +2,21 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './infrastructure/app.controller';
 import { AppService } from './application/app.service';
+import { Converter } from './model/converter';
+import { JSONFileLoader } from './model/json-file-loader';
+import { GraphBuilder } from './model/graph.builder';
 
 @Module({
   imports: [],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    Converter,
+    GraphBuilder,
+    {
+      provide: 'RuleLoader',
+      useClass: JSONFileLoader
+    }
+  ],
 })
 export class AppModule {}

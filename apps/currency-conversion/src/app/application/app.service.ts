@@ -10,6 +10,6 @@ export class AppService {
     to: string,
     amount: number
   ) {
-    console.log(`from: ${from}, to: ${to}, amount: ${amount}`)
+    return this.converter.findBestConversionRate(from, to, amount);
   }
 }

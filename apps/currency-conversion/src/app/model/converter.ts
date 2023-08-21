@@ -7,6 +7,18 @@ export class Converter {
   graph: Graph;
   constructor(private graphBuider: GraphBuilder) {
     this.graph = graphBuider.build();
-    // console.log("🚀 ~ file: converter.ts:10 ~ Converter ~ constructor ~ graph:", this.graph.adjacencyList)
   }
+
+  findBestConversionRate(from: string, to: string, amount: number) {
+    const { path, weight } = this.graph.findLongestPath(from, to, amount);
+    const conversionAmount = amount * weight;
+    path.unshift(from);
+    const conversionPath = path.reduce((previous, current) => `${previous} -> ${current}`);
+    return {
+      conversion: {
+        amount: conversionAmount.toFixed(2),
+        path: conversionPath
+      }
+    }
+  } 
 }

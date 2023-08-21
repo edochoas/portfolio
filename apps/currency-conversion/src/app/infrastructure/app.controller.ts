@@ -12,7 +12,6 @@ export class AppController {
     @Query('to') to,
     @Query('amount') amount
   ) {
-      this.appService.calculateBestConversion(from, to, amount);
-      return "fake data";
+      return this.appService.calculateBestConversion(from, to, amount);
   }
 }

@@ -16,6 +16,11 @@ import { GraphBuilder } from './model/graph.builder';
     {
       provide: 'RuleLoader',
       useClass: JSONFileLoader
+    }, 
+    {
+      provide: 'Graph',
+      useFactory: (graphBuilder: GraphBuilder) => graphBuilder.build(),
+      inject: [GraphBuilder]
     }
   ],
 })

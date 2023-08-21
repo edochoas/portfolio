@@ -1,16 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { GraphBuilder } from './graph.builder';
+import { Inject, Injectable } from '@nestjs/common';
 import { Graph } from './graph';
 
 @Injectable()
 export class Converter {
-  graph: Graph;
-  constructor(private graphBuider: GraphBuilder) {
-    this.graph = graphBuider.build();
-  }
+  constructor(@Inject('Graph') private conversionGraph: Graph) {}
 
   findBestConversionRate(from: string, to: string, amount: number) {
-    const { path, weight } = this.graph.findLongestPath(from, to, amount);
+    const { path, weight } = this.conversionGraph.findLongestPath(from, to, amount);
     const conversionAmount = amount * weight;
     path.unshift(from);
     const conversionPath = path.reduce((previous, current) => `${previous} -> ${current}`);

@@ -3,7 +3,9 @@ import { Graph } from './graph';
 
 @Injectable()
 export class Converter {
-  constructor(@Inject('Graph') private conversionGraph: Graph) {}
+  constructor(@Inject('Graph') private conversionGraph: Graph) {
+    conversionGraph.dfsRecursive('CAD');
+  }
 
   findBestConversionRate(from: string, to: string, amount: number) {
     const { path, weight } = this.conversionGraph.findLongestPath(from, to, amount);

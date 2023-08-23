@@ -48,4 +48,44 @@ export class Graph {
       weight
     }
   }
+
+  dfsRecursive(from: string) {
+    const paths = new Map<string, string>();
+    const weights = new Map<string, number>();
+    const dfs = (current: string,  currentPath: string[] = [], currentRates: number[] = [], maxWeight = 0) => {
+      const neighbors = this.adjacencyList.get(current);
+      neighbors.forEach((weight, neighbor) => {
+        currentPath.push(neighbor)
+        currentRates.push(weight);
+        dfs(neighbor, currentPath, currentRates, weights.get(neighbor));
+        currentPath.pop();
+        currentRates.pop();
+      });
+      const currentWeight = currentRates.reduce((previous, current) => previous * current, 100);
+      if (currentWeight > maxWeight) {
+        weights.set(current, currentWeight);
+        const path = currentPath.join('|');
+        paths.set(current, path);
+      }
+    }
+    dfs(from, [from], [], 0);
+    console.log(paths);
+  }
+
+  dfsIterative(from: string) {
+    const visited = new Set();
+    const stack: string[] = [];
+    stack.push(from);
+    while(stack.length > 0) {
+      const current = stack.pop();
+      if (!visited.has(current)) {
+        console.log(current);
+        visited.add(current);
+        const neighbors = this.adjacencyList.get(current);
+        neighbors.forEach((weight, neighbor) => {
+          stack.push(neighbor)
+        });
+      }
+    }
+  }
 }

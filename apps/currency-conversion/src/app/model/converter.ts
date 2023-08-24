@@ -1,22 +1,22 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Graph } from './graph';
+import { PathMap } from './path-map';
 
 @Injectable()
 export class Converter {
+  pathMap: PathMap;
   constructor(@Inject('Graph') private conversionGraph: Graph) {
-    conversionGraph.dfsRecursive('CAD');
+    this.pathMap = conversionGraph.findLongestPathsFrom('CAD');
   }
 
-  findBestConversionRate(from: string, to: string, amount: number) {
-    const { path, weight } = this.conversionGraph.findLongestPath(from, to, amount);
-    const conversionAmount = amount * weight;
-    path.unshift(from);
-    const conversionPath = path.reduce((previous, current) => `${previous} -> ${current}`);
-    return {
-      conversion: {
-        amount: conversionAmount.toFixed(2),
-        path: conversionPath
-      }
-    }
-  } 
+  findBestConversionRates(amount: number) {
+    this.pathMap.forEach((nodePath, currency) => {
+      let convertedAmount = amount;
+      let conversionPath = '';
+      nodePath.forEach((node,) => {
+        convertedAmount = node.weight * convertedAmount;
+        conversionPath += `|${node.name}`;
+      });
+    });
+  }
 }

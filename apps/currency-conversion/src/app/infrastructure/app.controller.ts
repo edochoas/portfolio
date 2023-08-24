@@ -8,10 +8,8 @@ export class AppController {
 
   @Get('/convert')
   getData(
-    @Query('from') from,
-    @Query('to') to,
     @Query('amount') amount
   ) {
-      return this.appService.calculateBestConversion(from, to, amount);
+      return this.appService.calculateBestConversions(amount);
   }
 }

@@ -5,11 +5,9 @@ import { Converter } from '../model/converter';
 export class AppService {
   constructor(private converter: Converter) {}
   
-  calculateBestConversion(
-    from: string,
-    to: string,
+  calculateBestConversions(
     amount: number
   ) {
-    return this.converter.findBestConversionRate(from, to, amount);
+    return this.converter.findBestConversionRates(amount);
   }
 }

@@ -1,3 +1,5 @@
+import { PathMap } from "./path-map";
+
 export class Graph {
   adjacencyList: Map<string, Map<string, number>>;
 
@@ -49,43 +51,45 @@ export class Graph {
     }
   }
 
-  dfsRecursive(from: string) {
-    const paths = new Map<string, string>();
-    const weights = new Map<string, number>();
-    const dfs = (current: string,  currentPath: string[] = [], currentRates: number[] = [], maxWeight = 0) => {
-      const neighbors = this.adjacencyList.get(current);
+  findLongestPathsFrom(fromNode: string): PathMap {
+    const longestPaths: PathMap = new Map();
+    const pathWeights = new Map<string, number>();
+
+    const deepFirstSearch = (currentNode: string,  currentPath = [], currentWeights: number[] = [], maxWeight = 0) => {
+      const neighbors = this.adjacencyList.get(currentNode);
       neighbors.forEach((weight, neighbor) => {
-        currentPath.push(neighbor)
-        currentRates.push(weight);
-        dfs(neighbor, currentPath, currentRates, weights.get(neighbor));
+        currentPath.push({ name: neighbor, weight });
+        currentWeights.push(weight);
+
+        deepFirstSearch(neighbor, currentPath, currentWeights, pathWeights.get(neighbor));
+        
         currentPath.pop();
-        currentRates.pop();
+        currentWeights.pop();
       });
-      const currentWeight = currentRates.reduce((previous, current) => previous * current, 100);
-      if (currentWeight > maxWeight) {
-        weights.set(current, currentWeight);
-        const path = currentPath.join('|');
-        paths.set(current, path);
+      const currentPathWeight = currentWeights.reduce((previous, current) => previous * current, 100);
+      if (currentPathWeight > maxWeight) {
+        pathWeights.set(currentNode, currentPathWeight);
+        longestPaths.set(currentNode, [...currentPath]);
       }
     }
-    dfs(from, [from], [], 0);
-    console.log(paths);
+    deepFirstSearch(fromNode, [], [], 0);
+    return longestPaths;
   }
 
-  dfsIterative(from: string) {
-    const visited = new Set();
-    const stack: string[] = [];
-    stack.push(from);
-    while(stack.length > 0) {
-      const current = stack.pop();
-      if (!visited.has(current)) {
-        console.log(current);
-        visited.add(current);
-        const neighbors = this.adjacencyList.get(current);
-        neighbors.forEach((weight, neighbor) => {
-          stack.push(neighbor)
-        });
-      }
-    }
-  }
+  // dfsIterative(from: string) {
+  //   const visited = new Set();
+  //   const stack: string[] = [];
+  //   stack.push(from);
+  //   while(stack.length > 0) {
+  //     const current = stack.pop();
+  //     if (!visited.has(current)) {
+  //       console.log(current);
+  //       visited.add(current);
+  //       const neighbors = this.adjacencyList.get(current);
+  //       neighbors.forEach((weight, neighbor) => {
+  //         stack.push(neighbor)
+  //       });
+  //     }
+  //   }
+  // }
 }

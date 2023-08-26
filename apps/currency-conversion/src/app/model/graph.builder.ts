@@ -9,7 +9,7 @@ export class GraphBuilder {
     const graph = new Graph();
     if (Array.isArray(rules)) {
       rules.forEach(rule => {
-        graph.addEdge(rule.fromCurrencyCode, rule.toCurrencyCode, rule.exchangeRate);
+        graph.addEdge(rule);
       });
     }
     return graph;

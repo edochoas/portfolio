@@ -1,54 +1,34 @@
+import { ExchangeRule } from "./exchange-rule";
 import { PathMap } from "./path-map";
 
 export class Graph {
   adjacencyList: Map<string, Map<string, number>>;
+  nodeMetadata: Map<string, { currencyName: string }>;
 
   constructor() {
     this.adjacencyList = new Map();
+    this.nodeMetadata = new Map();
   }
 
-  addVertex(vertex: string) {
+  addVertex(vertex: string, metadata: string) {
     if (!this.adjacencyList.get(vertex)) {
       this.adjacencyList.set(vertex, new Map());
+      this.nodeMetadata.set(vertex, { currencyName: metadata })
     }
   }
 
-  addEdge(from: string, to: string, weight = 1) {
-    this.addVertex(from);
-    this.addVertex(to);
-    this.adjacencyList.get(from).set(to, weight);
+  addEdge(rule: ExchangeRule) {
+    this.addVertex(rule.fromCurrencyCode, rule.fromCurrencyName);
+    this.addVertex(rule.toCurrencyCode, rule.toCurrencyName);
+    this.adjacencyList.get(rule.fromCurrencyCode).set(rule.toCurrencyCode, rule.exchangeRate);
   }
 
   getNumberOfVertex() {
     return this.adjacencyList.size;
   }
 
-  findLongestPath(from: string, to: string, amount: number): { path: string[], weight: number } {
-    let longestPath = [];
-    let weight = 0;
-    const dfs = (current: string, currentPath: string[] = [], currentRates: number[] = []) => {
-      if (current !== to) {
-        const neighbors = this.adjacencyList.get(current);
-        neighbors.forEach((weight, neighbor) => {
-          currentPath.push(neighbor)
-          currentRates.push(weight);
-          dfs(neighbor, currentPath, currentRates);
-        });
-      } else {
-        const currentWeight = currentRates.reduce((previous, current) => previous * current, amount);
-        if (currentWeight > weight) {
-          weight = currentWeight;
-          longestPath = [...currentPath];
-        }
-      }
-      currentPath.pop()
-      currentRates.pop()
-    }
-    dfs(from);
-    return {
-      path: longestPath,
-      weight
-    }
+  getNodeMetadata(vertex: string) {
+    return this.nodeMetadata.get(vertex);
   }
 
   findLongestPathsFrom(fromNode: string): PathMap {

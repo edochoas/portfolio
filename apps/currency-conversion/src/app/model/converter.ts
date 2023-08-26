@@ -17,6 +17,10 @@ export class Converter {
         convertedAmount = node.weight * convertedAmount;
         conversionPath += `|${node.name}`;
       });
+      const { currencyName } = this.conversionGraph.getNodeMetadata(currency);
+      const currencyArray = currencyName.split(' ');
+      const country = currencyArray.length > 1 ? currencyArray.splice(0, currencyArray.length -1).join(' ') : currencyName;
+      console.log(`currency: ${currency}, country: ${country}, amount: ${convertedAmount}, path: ${conversionPath}`);
     });
   }
 }

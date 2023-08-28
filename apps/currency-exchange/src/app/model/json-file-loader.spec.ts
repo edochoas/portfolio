@@ -12,5 +12,5 @@ describe('JSONFileLoader', () => {
       expect(rules).toBeDefined();
       expect(rules.length).toBeGreaterThan(0);
     });
-  })
+  });
 });

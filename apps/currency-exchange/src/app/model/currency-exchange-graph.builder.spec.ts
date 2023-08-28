@@ -1,4 +1,4 @@
-import { GraphBuilder } from './graph.builder';
+import { CurrencyExchangeGraphBuilder } from './currency-exchange-graph.builder';
 
 const data = [
   {
@@ -21,14 +21,14 @@ const data = [
     fromCurrencyName: 'USA Dollar',
     toCurrencyCode: 'HKD',
     toCurrencyName: 'Hong Kong Dollar',
-  }
+  },
 ];
 
 describe('GraphBuilder', () => {
-  let builder: GraphBuilder;
+  let builder: CurrencyExchangeGraphBuilder;
 
   beforeAll(() => {
-    builder = new GraphBuilder();
+    builder = new CurrencyExchangeGraphBuilder();
   });
 
   it('should be created', () => {

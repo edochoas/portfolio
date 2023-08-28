@@ -1,16 +1,16 @@
-import { Graph } from './graph';
+import { CurrencyExchangeGraph } from './currency-exchange-graph';
 describe('Graph', () => {
-  let graph: Graph;
+  let graph: CurrencyExchangeGraph;
 
   beforeAll(() => {
-    graph = new Graph();
+    graph = new CurrencyExchangeGraph();
   });
 
   it('should be created', () => {
     expect(graph).toBeTruthy();
   });
 
-  it ('should add a vertext', () => {
+  it('should add a vertext', () => {
     graph.addVertex('CAD');
     expect(graph.getNumberOfVertex()).toEqual(1);
   });

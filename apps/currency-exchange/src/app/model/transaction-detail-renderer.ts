@@ -1,12 +1,12 @@
 interface TransactionDetail {
   currencyCode: string;
   country: string;
-  amount: string;
+  amount: number;
   path: string;
 }
 
-interface Renderer {
+interface TransactionDetailRenderer {
   render(data: TransactionDetail[]): string;
 }
 
-export { TransactionDetail, Renderer };
+export { TransactionDetail, TransactionDetailRenderer as Renderer };

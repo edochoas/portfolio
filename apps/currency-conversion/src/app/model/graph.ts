@@ -53,6 +53,7 @@ export class Graph {
       }
     }
     deepFirstSearch(fromNode, [], [], 0);
+    longestPaths.delete('CAD');
     return longestPaths;
   }
 

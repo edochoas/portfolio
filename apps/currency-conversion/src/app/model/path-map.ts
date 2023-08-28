@@ -1,3 +1,5 @@
 type GraphNode = { name: string, weight: number };
 
-export type PathMap = Map<string, GraphNode[]>;
+type PathMap = Map<string, GraphNode[]>;
+
+export {GraphNode, PathMap}

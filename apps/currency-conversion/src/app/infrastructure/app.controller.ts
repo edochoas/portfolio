@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Header, Query } from '@nestjs/common';
 
 import { AppService } from '../application/app.service';
 
@@ -7,6 +7,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('/convert')
+  @Header('Content-Disposition', 'attachment; filename="transaction-details.csv')
   getData(
     @Query('amount') amount
   ) {

@@ -5,6 +5,7 @@ import { AppService } from './application/app.service';
 import { Converter } from './model/converter';
 import { JSONFileLoader } from './model/json-file-loader';
 import { GraphBuilder } from './model/graph.builder';
+import { CsvRenderer } from './model/csv-renderer';
 
 @Module({
   imports: [],
@@ -17,6 +18,10 @@ import { GraphBuilder } from './model/graph.builder';
       provide: 'RuleLoader',
       useClass: JSONFileLoader
     }, 
+    {
+      provide: 'RENDERER',
+      useClass: CsvRenderer
+    },
     {
       provide: 'Graph',
       useFactory: (graphBuilder: GraphBuilder) => graphBuilder.build(),

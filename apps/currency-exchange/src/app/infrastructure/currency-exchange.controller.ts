@@ -1,4 +1,4 @@
-import { Controller, Get, Header, Query } from '@nestjs/common';
+import { Controller, Get, Header, ParseIntPipe, Query } from '@nestjs/common';
 import { CurrencyExchangeService } from '../application/currency-exchange.service';
 import { ApiQuery } from '@nestjs/swagger';
 
@@ -15,8 +15,7 @@ export class AppController {
     'Content-Disposition',
     'attachment; filename="transaction-details.csv'
   )
-  getData(@Query('amount') amount: string) {
-    const amountNumber = Number(amount);
-    return this.appService.calculateBestExchangeRates(amountNumber);
+  getData(@Query('amount', ParseIntPipe) amount: number) {
+    return this.appService.calculateBestExchangeRates(amount);
   }
 }

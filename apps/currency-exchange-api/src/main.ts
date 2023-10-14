@@ -3,7 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
-const GLOBAL_PREFFIX = 'currency-exchange';
+const GLOBAL_PREFFIX = 'currency-exchange-api';
 
 async function bootstrap() {
   const app = await createApp();
@@ -14,7 +14,7 @@ async function bootstrap() {
 async function createApp() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix(GLOBAL_PREFFIX);
-  return app
+  return app;
 }
 
 async function setupServer(app: INestApplication) {
@@ -27,7 +27,7 @@ async function setupServer(app: INestApplication) {
 
 function setupSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
-    .setTitle('Currency Exchange')
+    .setTitle('Currency Exchange API')
     .setDescription(
       'API that allows you to calculate the best conversion of the Canadian dollar to other currencies'
     )

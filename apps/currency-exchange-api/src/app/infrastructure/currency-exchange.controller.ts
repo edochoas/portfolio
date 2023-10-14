@@ -8,7 +8,7 @@ export class AppController {
 
   @ApiQuery({
     name: 'amount',
-    description: 'amount to exchage'
+    description: 'amount to exchage',
   })
   @Get('/exchange')
   @Header(

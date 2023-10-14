@@ -1,7 +1,7 @@
 {
-  "name": "currency-exchange",
+  "name": "currency-exchange-api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/currency-exchange/src",
+  "sourceRoot": "apps/currency-exchange-api/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -10,10 +10,10 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/currency-exchange",
-        "main": "apps/currency-exchange/src/main.ts",
-        "tsConfig": "apps/currency-exchange/tsconfig.app.json",
-        "assets": ["apps/currency-exchange/src/assets"]
+        "outputPath": "dist/apps/currency-exchange-api",
+        "main": "apps/currency-exchange-api/src/main.ts",
+        "tsConfig": "apps/currency-exchange-api/tsconfig.app.json",
+        "assets": ["apps/currency-exchange-api/src/assets"]
       },
       "configurations": {
         "production": {
@@ -22,8 +22,8 @@
           "inspect": false,
           "fileReplacements": [
             {
-              "replace": "apps/currency-exchange/src/environments/environment.ts",
-              "with": "apps/currency-exchange/src/environments/environment.prod.ts"
+              "replace": "apps/currency-exchange-api/src/environments/environment.ts",
+              "with": "apps/currency-exchange-api/src/environments/environment.prod.ts"
             }
           ]
         }
@@ -32,11 +32,11 @@
     "serve": {
       "executor": "@nrwl/js:node",
       "options": {
-        "buildTarget": "currency-exchange:build"
+        "buildTarget": "currency-exchange-api:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "currency-exchange:build:production"
+          "buildTarget": "currency-exchange-api:build:production"
         }
       }
     },
@@ -44,14 +44,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/currency-exchange/**/*.ts"]
+        "lintFilePatterns": ["apps/currency-exchange-api/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/currency-exchange/jest.config.ts",
+        "jestConfig": "apps/currency-exchange-api/jest.config.ts",
         "passWithNoTests": true
       }
     }

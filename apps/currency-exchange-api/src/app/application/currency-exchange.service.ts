@@ -10,7 +10,8 @@ export class CurrencyExchangeService {
   ) {}
 
   calculateBestExchangeRates(amount: number) {
-    const transactionDetails = this.converter.calculateBestExchangeRates(amount);
+    const transactionDetails =
+      this.converter.calculateBestExchangeRates(amount);
     const fileData = this.renderer.render(transactionDetails);
     return new StreamableFile(Buffer.from(fileData));
   }

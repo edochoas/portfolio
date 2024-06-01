@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/currency-exchange-api/src",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nrwl/webpack:webpack",
@@ -13,7 +14,8 @@
         "outputPath": "dist/apps/currency-exchange-api",
         "main": "apps/currency-exchange-api/src/main.ts",
         "tsConfig": "apps/currency-exchange-api/tsconfig.app.json",
-        "assets": ["apps/currency-exchange-api/src/assets"]
+        "assets": ["apps/currency-exchange-api/src/assets"],
+        "webpackConfig": "apps/currency-exchange-api/webpack.config.js"
       },
       "configurations": {
         "production": {
@@ -41,20 +43,14 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/currency-exchange-api/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/currency-exchange-api/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/currency-exchange-api/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

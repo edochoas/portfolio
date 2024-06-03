@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
   displayName: 'currency-exchange-api',
-  preset: '../../jest.preset.js',
+  preset: '../../../jest.preset.js',
   globals: {},
   testEnvironment: 'node',
   transform: {
@@ -13,5 +13,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/apps/currency-exchange-api',
+  coverageDirectory: '../../../coverage/apps/currency-exchange/api',
 };

@@ -1,27 +1,27 @@
 {
-  "name": "frontend-ng",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "currency-exchange-front-ng",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/frontend-ng/src",
+  "sourceRoot": "apps/currency-exchange/front-ng/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/frontend-ng",
-        "index": "apps/frontend-ng/src/index.html",
-        "browser": "apps/frontend-ng/src/main.ts",
+        "outputPath": "dist/apps/currency-exchange/front-ng",
+        "index": "apps/currency-exchange/front-ng/src/index.html",
+        "browser": "apps/currency-exchange/front-ng/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/frontend-ng/tsconfig.app.json",
+        "tsConfig": "apps/currency-exchange/front-ng/tsconfig.app.json",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/frontend-ng/public"
+            "input": "apps/currency-exchange/front-ng/public"
           }
         ],
-        "styles": ["apps/frontend-ng/src/styles.css"],
+        "styles": ["apps/currency-exchange/front-ng/src/styles.css"],
         "scripts": []
       },
       "configurations": {
@@ -52,10 +52,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "frontend-ng:build:production"
+          "buildTarget": "currency-exchange-front-ng:build:production"
         },
         "development": {
-          "buildTarget": "frontend-ng:build:development"
+          "buildTarget": "currency-exchange-front-ng:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -63,7 +63,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "frontend-ng:build"
+        "buildTarget": "currency-exchange-front-ng:build"
       }
     },
     "lint": {
@@ -73,7 +73,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/frontend-ng/jest.config.ts"
+        "jestConfig": "apps/currency-exchange/front-ng/jest.config.ts"
       }
     }
   }

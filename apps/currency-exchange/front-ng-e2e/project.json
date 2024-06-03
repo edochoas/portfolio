@@ -1,0 +1,21 @@
+{
+  "name": "currency-exchange-front-ng-e2e",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/currency-exchange/front-ng-e2e/src",
+  "implicitDependencies": ["currency-exchange-front-ng"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/playwright:playwright",
+      "outputs": [
+        "{workspaceRoot}/dist/.playwright/apps/currency-exchange/front-ng-e2e"
+      ],
+      "options": {
+        "config": "apps/currency-exchange/front-ng-e2e/playwright.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

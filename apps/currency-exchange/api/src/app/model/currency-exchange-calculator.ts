@@ -35,10 +35,12 @@ export class CurrencyExchangeCalculator {
   getAvailableCurrencies() {
     const currencyList = [];
     this.conversionGraph.nodeMetadata.forEach((value, key) => {
-      currencyList.push({
-        currencyName: value.currencyName,
-        currencyCode: key
-      })
+      if (key !== "CAD") {
+        currencyList.push({
+          currencyName: value.currencyName,
+          currencyCode: key
+        })
+      }
     })
     return currencyList;
   }

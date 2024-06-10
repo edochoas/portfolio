@@ -55,7 +55,8 @@
           "buildTarget": "currency-exchange-front-ng:build:production"
         },
         "development": {
-          "buildTarget": "currency-exchange-front-ng:build:development"
+          "buildTarget": "currency-exchange-front-ng:build:development",
+          "proxyConfig": "apps/currency-exchange/front-ng/proxy.conf.json"
         }
       },
       "defaultConfiguration": "development"

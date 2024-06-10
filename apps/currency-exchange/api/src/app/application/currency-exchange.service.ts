@@ -15,4 +15,8 @@ export class CurrencyExchangeService {
     const fileData = this.renderer.render(transactionDetails);
     return new StreamableFile(Buffer.from(fileData));
   }
+
+  getCurrencies() {
+    return this.converter.getAvailableCurrencies()
+  }
 }

@@ -32,6 +32,17 @@ export class CurrencyExchangeCalculator {
     return transactionDetails;
   }
 
+  getAvailableCurrencies() {
+    const currencyList = [];
+    this.conversionGraph.nodeMetadata.forEach((value, key) => {
+      currencyList.push({
+        currencyName: value.currencyName,
+        currencyCode: key
+      })
+    })
+    return currencyList;
+  }
+
   private formatConversionPath(path: GraphNode[]) {
     return path.map((node) => node.name).join('|');
   }

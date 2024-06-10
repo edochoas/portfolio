@@ -18,4 +18,9 @@ export class AppController {
   getData(@Query('amount', ParseIntPipe) amount: number) {
     return this.appService.calculateBestExchangeRates(amount);
   }
+
+  @Get('/currencies')
+  getCurrencies() {
+    return this.appService.getCurrencies();
+  }
 }

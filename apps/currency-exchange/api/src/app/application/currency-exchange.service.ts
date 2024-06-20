@@ -16,6 +16,10 @@ export class CurrencyExchangeService {
     return new StreamableFile(Buffer.from(fileData));
   }
 
+  findBestConversion(amount: number, currency: string){
+    return this.converter.findBestConversion(amount, currency);
+  }
+
   getCurrencies() {
     return this.converter.getAvailableCurrencies()
   }

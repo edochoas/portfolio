@@ -32,6 +32,11 @@ export class CurrencyExchangeCalculator {
     return transactionDetails;
   }
 
+  findBestConversion(amount: number, currency: string) {
+    const path = this.pathMap.get(currency);
+    return this.getConversionPath(path, amount);
+  }
+
   getAvailableCurrencies() {
     const currencyList = [];
     this.conversionGraph.nodeMetadata.forEach((value, key) => {
@@ -55,9 +60,26 @@ export class CurrencyExchangeCalculator {
   ): number {
     let convertedAmount = amount;
     for (const node of path) {
-      convertedAmount = node.weight * convertedAmount;
+      convertedAmount *= node.weight;
     }
     return convertedAmount;
+  }
+
+  private getConversionPath( path: GraphNode[], amount: number) {
+    const conversionPath = [];
+    let convertedAmount = amount;
+    for (const node of path) {
+      convertedAmount *= node.weight;
+      conversionPath.push({
+        currencyCode: node.name,
+        exchangeRate: node.weight,
+        convertedAmount: convertedAmount
+      })
+    }
+    return {
+      amount: convertedAmount,
+      path: conversionPath
+    }
   }
 
   private getCountryForCurrency(currency: string) {

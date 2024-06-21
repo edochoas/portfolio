@@ -5,7 +5,7 @@
     {
       "files": ["*.ts"],
       "parserOptions": {
-        "project": ["apps/currency-exchange/front-ng/tsconfig.*?.json"]
+        "project": ["apps/currency-exchange/web/tsconfig.*?.json"]
       },
       "extends": [
         "plugin:@nx/angular",

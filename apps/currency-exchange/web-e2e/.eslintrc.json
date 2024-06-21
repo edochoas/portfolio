@@ -5,7 +5,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "parserOptions": {
-        "project": ["apps/currency-exchange/front-ng-e2e/tsconfig.*?.json"]
+        "project": ["apps/currency-exchange/web-e2e/tsconfig.*?.json"]
       },
       "rules": {}
     },
@@ -20,7 +20,7 @@
     {
       "files": ["src/**/*.{ts,js,tsx,jsx}"],
       "parserOptions": {
-        "project": "apps/currency-exchange/front-ng-e2e/tsconfig.*?.json"
+        "project": "apps/currency-exchange/web-e2e/tsconfig.*?.json"
       },
       "rules": {}
     }

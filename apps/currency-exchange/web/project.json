@@ -1,27 +1,27 @@
 {
-  "name": "currency-exchange-front-ng",
+  "name": "currency-exchange-web",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/currency-exchange/front-ng/src",
+  "sourceRoot": "apps/currency-exchange/web/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/currency-exchange/front-ng",
-        "index": "apps/currency-exchange/front-ng/src/index.html",
-        "browser": "apps/currency-exchange/front-ng/src/main.ts",
+        "outputPath": "dist/apps/currency-exchange/web",
+        "index": "apps/currency-exchange/web/src/index.html",
+        "browser": "apps/currency-exchange/web/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/currency-exchange/front-ng/tsconfig.app.json",
+        "tsConfig": "apps/currency-exchange/web/tsconfig.app.json",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/currency-exchange/front-ng/public"
+            "input": "apps/currency-exchange/web/public"
           }
         ],
-        "styles": ["apps/currency-exchange/front-ng/src/styles.css"],
+        "styles": ["apps/currency-exchange/web/src/styles.css"],
         "scripts": []
       },
       "configurations": {
@@ -52,11 +52,11 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "currency-exchange-front-ng:build:production"
+          "buildTarget": "currency-exchange-web:build:production"
         },
         "development": {
-          "buildTarget": "currency-exchange-front-ng:build:development",
-          "proxyConfig": "apps/currency-exchange/front-ng/proxy.conf.json"
+          "buildTarget": "currency-exchange-web:build:development",
+          "proxyConfig": "apps/currency-exchange/web/proxy.conf.json"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "currency-exchange-front-ng:build"
+        "buildTarget": "currency-exchange-web:build"
       }
     },
     "lint": {
@@ -74,7 +74,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/currency-exchange/front-ng/jest.config.ts"
+        "jestConfig": "apps/currency-exchange/web/jest.config.ts"
       }
     }
   }

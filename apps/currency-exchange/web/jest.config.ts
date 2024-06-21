@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'currency-exchange-front-ng',
+  displayName: 'currency-exchange-web',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../coverage/apps/currency-exchange/front-ng',
+  coverageDirectory: '../../../coverage/apps/currency-exchange/web',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

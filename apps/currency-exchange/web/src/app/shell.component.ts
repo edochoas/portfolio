@@ -13,13 +13,13 @@ export class ShellComponent implements OnInit {
   currencies: CurrencyResponse = [];
   convertedAmount = 0;
   firstCall = true;
-    
-  constructor(private api: ApiService) {} 
+
+  constructor(private api: ApiService) {}
 
   ngOnInit(): void {
     this.api.getCurrencies().subscribe((currencies) => {
-      this.currencies = currencies
-    })
+      this.currencies = currencies;
+    });
   }
 
   onSubmit(event: any) {
@@ -29,6 +29,6 @@ export class ShellComponent implements OnInit {
     this.api.convert(amount, currency).subscribe((response) => {
       this.firstCall = false;
       this.convertedAmount = response.amount;
-    })
+    });
   }
 }

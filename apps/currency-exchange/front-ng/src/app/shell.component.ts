@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService } from './api.service';
+import { ApiService, CurrencyResponse } from './api.service';
 
 @Component({
   selector: 'app-shell',
@@ -10,10 +10,10 @@ import { ApiService } from './api.service';
   styleUrl: './shell.component.css',
 })
 export class ShellComponent implements OnInit {
-  currencies: any;
-  selectedCurrency = "";
-  amount = 0;
-  
+  currencies: CurrencyResponse = [];
+  convertedAmount = 0;
+  firstCall = true;
+    
   constructor(private api: ApiService) {} 
 
   ngOnInit(): void {
@@ -22,6 +22,13 @@ export class ShellComponent implements OnInit {
     })
   }
 
-  onSubmit() {
+  onSubmit(event: any) {
+    event.preventDefault();
+    const amount = event.target.amount.value;
+    const currency = event.target.currency.value;
+    this.api.convert(amount, currency).subscribe((response) => {
+      this.firstCall = false;
+      this.convertedAmount = response.amount;
+    })
   }
 }

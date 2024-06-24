@@ -2,13 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+export type Transaction = {
+  previousAmount: number;
+  previousCurrency: number;
+  currencyCode: string;
+  exchangeRate: number;
+  convertedAmount: number;
+}
+
 type ConvertResponse = {
   amount: number;
-  path: Array<{
-    currencyCode: string;
-    exchangeRate: number;
-    convertedAmount: number;
-  }>;
+  path: Transaction[];
 };
 interface Currency {
   currencyName: string;

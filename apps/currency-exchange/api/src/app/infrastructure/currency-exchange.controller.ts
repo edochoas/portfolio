@@ -29,7 +29,7 @@ export class AppController {
     description: 'target currency',
   })
   getBestConversion(@Query('amount') amount, @Query('currency') currency) {
-    return this.appService.findBestConversion(amount, currency)
+    return this.appService.findBestConversion(Number(amount), currency)
   }
 
   @Get('/currencies')

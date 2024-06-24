@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService, CurrencyResponse } from './api.service';
+import { ApiService, CurrencyResponse, Transaction } from './api.service';
 
 @Component({
   selector: 'app-shell',
@@ -12,6 +12,7 @@ import { ApiService, CurrencyResponse } from './api.service';
 export class ShellComponent implements OnInit {
   currencies: CurrencyResponse = [];
   convertedAmount = 0;
+  transactions: Transaction[] = []
   firstCall = true;
 
   constructor(private api: ApiService) {}
@@ -29,6 +30,7 @@ export class ShellComponent implements OnInit {
     this.api.convert(amount, currency).subscribe((response) => {
       this.firstCall = false;
       this.convertedAmount = response.amount;
+      this.transactions = response.path
     });
   }
 }

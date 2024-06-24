@@ -68,13 +68,20 @@ export class CurrencyExchangeCalculator {
   private getConversionPath( path: GraphNode[], amount: number) {
     const conversionPath = [];
     let convertedAmount = amount;
+    let previousAmount = amount;
+    let previousCurrency = 'CAD';
+
     for (const node of path) {
       convertedAmount *= node.weight;
       conversionPath.push({
+        previousAmount,
+        previousCurrency,
         currencyCode: node.name,
         exchangeRate: node.weight,
         convertedAmount: convertedAmount
-      })
+      });
+      previousAmount = convertedAmount
+      previousCurrency = node.name
     }
     return {
       amount: convertedAmount,

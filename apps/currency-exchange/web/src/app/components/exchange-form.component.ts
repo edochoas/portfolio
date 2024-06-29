@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService, CurrencyResponse, Transaction } from './api.service';
+import { ApiService, CurrencyResponse, Transaction } from '../services/api.service';
 
 @Component({
-  selector: 'app-shell',
+  selector: 'app-exchange-form',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './shell.component.html',
-  styleUrl: './shell.component.css',
+  templateUrl: './exchange-form.component.html',
+  styleUrl: './exchange-form.component.css',
 })
-export class ShellComponent implements OnInit {
+export class ExchangeFormComponent implements OnInit {
   currencies: CurrencyResponse = [];
   convertedAmount = 0;
   transactions: Transaction[] = []

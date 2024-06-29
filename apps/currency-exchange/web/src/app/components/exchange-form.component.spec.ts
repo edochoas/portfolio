@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ShellComponent } from './shell.component';
+import { ExchangeFormComponent } from './exchange-form.component';
 
-describe('ShellComponent', () => {
-  let component: ShellComponent;
-  let fixture: ComponentFixture<ShellComponent>;
+describe('ExchangeFormComponent', () => {
+  let component: ExchangeFormComponent;
+  let fixture: ComponentFixture<ExchangeFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShellComponent],
+      imports: [ExchangeFormComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ShellComponent);
+    fixture = TestBed.createComponent(ExchangeFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

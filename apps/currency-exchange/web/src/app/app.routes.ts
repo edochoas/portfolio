@@ -1,4 +1,4 @@
 import { Route } from '@angular/router';
-import { ShellComponent } from './shell.component';
+import { HomeComponent } from './pages/home.component';
 
-export const appRoutes: Route[] = [{ path: '', component: ShellComponent }];
+export const appRoutes: Route[] = [{ path: '', component: HomeComponent }];

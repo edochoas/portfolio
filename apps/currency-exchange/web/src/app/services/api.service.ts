@@ -14,12 +14,11 @@ type ConvertResponse = {
   amount: number;
   path: Transaction[];
 };
-interface Currency {
+export interface Currency {
   currencyName: string;
   currencyCode: string;
 }
 
-export type CurrencyResponse = Currency[];
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +29,7 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getCurrencies() {
-    return this.http.get<CurrencyResponse>(`/${this.basePath}/currencies`);
+    return this.http.get<Currency[]>(`/${this.basePath}/currencies`);
   }
 
   convert(amount: number, currency: string): Observable<ConvertResponse> {

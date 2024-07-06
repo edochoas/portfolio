@@ -4,7 +4,7 @@ import { ApiService, Currency, Transaction } from '../services/api.service';
 import { FormsModule } from '@angular/forms';
 
 class Operation {
-  constructor(public amount?: number, public currency?: string) {}
+  constructor(public amount: number | null =  null, public currency = '') {}
 }
 
 @Component({
@@ -28,28 +28,33 @@ export class ExchangeFormComponent implements OnInit {
     this.api.getCurrencies().subscribe((currencies) => {
       this.currencies = currencies;
       if (currencies.length > 0) {
-        this.operation.currency = currencies[0].currencyCode;
-        this.selectedCurrency = currencies[0].currencyName;
+        const [firstCurrency] = currencies;
+        this.operation.currency = firstCurrency.currencyCode;
+        this.selectedCurrency = firstCurrency.currencyName;
       }
     });
   }
 
   onCurrencyChange() {
+    this.submitted = false
     const selectedCurrency = this.currencies.find(
       (currency) => currency.currencyCode === this.operation.currency
     );
     this.selectedCurrency = selectedCurrency
       ? selectedCurrency.currencyName
-      : '';
+      : ''; 
+    this.makeConversion()
   }
 
-  onSubmit() {
-    const amount = this.operation.amount || 0.0;
-    const currency = this.operation.currency || '';
-    this.api.convert(amount, currency).subscribe((response) => {
-      this.submitted = true;
-      this.convertedAmount = response.amount;
-      this.transactions = response.path;
-    });
+  makeConversion() {
+    const { currency, amount } = this.operation
+    if (currency && amount) {
+      this.api.convert(amount, currency).subscribe((response) => {
+        this.submitted = true;
+        this.convertedAmount = response.amount;
+        this.transactions = response.path;
+      });
+    }
+    
   }
 }

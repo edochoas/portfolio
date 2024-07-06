@@ -2,7 +2,7 @@
   id="form-container"
   class="mx-auto text-left bg-white px-8 py-4 mt-8 ring-1 ring-gray-200 shadow-lg rounded-md"
 >
-  <form #exchangeForm="ngForm" (submit)="onSubmit()">
+  <form #exchangeForm="ngForm" (ngSubmit)="makeConversion()" >
     <div class="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
       <div class="sm:col-span-3">
         <label
@@ -14,11 +14,12 @@
           <input
             type="number"
             name="amount"
+            #amount="ngModel"
             [(ngModel)]="operation.amount"
             id="amount"
             placeholder="0.00"
-            autocomplete="given-name"
             autofocus
+            required
             class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
           />
         </div>
@@ -88,8 +89,8 @@
       <div class="sm:col-span-6 justify-self-end">
         <button
           type="submit"
-          class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
+          [disabled]="!exchangeForm.form.valid"
+          class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm disabled:opacity-75 enabled:hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
           Convert
         </button>
       </div>

@@ -21,7 +21,7 @@ export class ExchangeFormComponent implements OnInit {
   currencies: Currency[] = [];
   convertedAmount = 0;
   transactions: Transaction[] = []
-  firstCall = true;
+  submitted = false;
   operation = new Operation();
   selectedCurrency = ''
 
@@ -33,6 +33,7 @@ export class ExchangeFormComponent implements OnInit {
       this.currencies = currencies;
       if (currencies.length > 0) {
         this.operation.currency = currencies[0].currencyCode;
+        this.selectedCurrency = currencies[0].currencyName;
       }
     });
   }
@@ -43,11 +44,10 @@ export class ExchangeFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.operation)
     const amount = this.operation.amount || 0.0;
     const currency = this.operation.currency || '';
     this.api.convert(amount, currency).subscribe((response) => {
-      this.firstCall = false;
+      this.submitted = true;
       this.convertedAmount = response.amount;
       this.transactions = response.path
     });

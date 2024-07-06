@@ -4,10 +4,7 @@ import { ApiService, Currency, Transaction } from '../services/api.service';
 import { FormsModule } from '@angular/forms';
 
 class Operation {
-  constructor(
-    public amount?: number,
-    public currency?: string
-  ) {}
+  constructor(public amount?: number, public currency?: string) {}
 }
 
 @Component({
@@ -20,11 +17,10 @@ class Operation {
 export class ExchangeFormComponent implements OnInit {
   currencies: Currency[] = [];
   convertedAmount = 0;
-  transactions: Transaction[] = []
+  transactions: Transaction[] = [];
   submitted = false;
   operation = new Operation();
-  selectedCurrency = ''
-
+  selectedCurrency = '';
 
   constructor(private api: ApiService) {}
 
@@ -39,8 +35,12 @@ export class ExchangeFormComponent implements OnInit {
   }
 
   onCurrencyChange() {
-    const selectedCurrency = this.currencies.find(currency => currency.currencyCode === this.operation.currency);
-    this.selectedCurrency = selectedCurrency ? selectedCurrency.currencyName : '';
+    const selectedCurrency = this.currencies.find(
+      (currency) => currency.currencyCode === this.operation.currency
+    );
+    this.selectedCurrency = selectedCurrency
+      ? selectedCurrency.currencyName
+      : '';
   }
 
   onSubmit() {
@@ -49,7 +49,7 @@ export class ExchangeFormComponent implements OnInit {
     this.api.convert(amount, currency).subscribe((response) => {
       this.submitted = true;
       this.convertedAmount = response.amount;
-      this.transactions = response.path
+      this.transactions = response.path;
     });
   }
 }

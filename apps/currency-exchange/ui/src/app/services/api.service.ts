@@ -8,7 +8,7 @@ export type Transaction = {
   currencyCode: string;
   exchangeRate: number;
   convertedAmount: number;
-}
+};
 
 type ConvertResponse = {
   amount: number;
@@ -18,7 +18,6 @@ export interface Currency {
   currencyName: string;
   currencyCode: string;
 }
-
 
 @Injectable({
   providedIn: 'root',

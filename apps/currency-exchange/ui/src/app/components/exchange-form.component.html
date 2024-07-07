@@ -16,6 +16,7 @@
             name="amount"
             #amount="ngModel"
             [(ngModel)]="operation.amount"
+            (input)="onInput()"
             id="amount"
             placeholder="0.00"
             autofocus

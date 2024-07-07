@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService, Currency, Transaction } from '../services/api.service';
 import { FormsModule } from '@angular/forms';
+import { Subject, debounceTime } from 'rxjs';
 
 class Operation {
   constructor(public amount: number | null =  null, public currency = '') {}
@@ -21,6 +22,7 @@ export class ExchangeFormComponent implements OnInit {
   submitted = false;
   operation = new Operation();
   selectedCurrency = '';
+  searchSubject = new Subject<number>();
 
   constructor(private api: ApiService) {}
 
@@ -33,17 +35,28 @@ export class ExchangeFormComponent implements OnInit {
         this.selectedCurrency = firstCurrency.currencyName;
       }
     });
+    this.searchSubject.pipe(debounceTime(500)).subscribe(() => {
+      this.makeConversion()
+    });
+  }
+
+  onInput() {
+    if (this.submitted) {
+      this.searchSubject.next(this.operation.amount || 0);
+    }
   }
 
   onCurrencyChange() {
-    this.submitted = false
+    this.makeConversion()
+  }
+
+  updateSelectedCurrency() {
     const selectedCurrency = this.currencies.find(
       (currency) => currency.currencyCode === this.operation.currency
     );
     this.selectedCurrency = selectedCurrency
       ? selectedCurrency.currencyName
       : ''; 
-    this.makeConversion()
   }
 
   makeConversion() {
@@ -53,6 +66,7 @@ export class ExchangeFormComponent implements OnInit {
         this.submitted = true;
         this.convertedAmount = response.amount;
         this.transactions = response.path;
+        this.updateSelectedCurrency();
       });
     }
     

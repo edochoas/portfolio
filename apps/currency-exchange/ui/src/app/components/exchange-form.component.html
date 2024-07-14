@@ -1,6 +1,6 @@
 <div
   id="form-container"
-  class="mx-auto text-left bg-white px-8 py-4 mt-8 ring-1 ring-gray-200 shadow-lg rounded-md"
+  class="mx-auto text-left bg-white px-4 sm:px-8 py-4 mt-8 ring-1 ring-gray-200 shadow-lg rounded-md"
 >
   <form #exchangeForm="ngForm" (ngSubmit)="makeConversion()" >
     <div class="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -47,45 +47,52 @@
           </select>
         </div>
       </div>
-      <div class="col-span-6" [class.hidden]="!submitted">
+      <div class="sm:col-span-3" [class.hidden]="!submitted">
         <p class="font-semibold text-gray-500">1 Canada Dollar =</p>
-        <span class="font-semibold text-3xl text-indigo-600">{{
+        <span class="font-semibold text-xl sm:text-3xl text-indigo-600">{{
           convertedAmount
         }}</span
-        ><span class="font-semibold text-2xl text-slate-600">
+        ><span class="font-semibold text-lg sm:text-2xl text-slate-600">
           {{ selectedCurrency }}</span
         >
       </div>
       <div class="sm:col-span-6" [class.hidden]="!submitted">
-        <!-- <h3 class="text-2xl font-bold text-indigo-600 text-uppercase underline text-center">Transaction Detail:</h3> -->
-        <table class="w-full text-center divide-y mt-6">
-          <thead>
-            <tr>
-              <th class="pb-2 font-bold text-slate-700">Origin Amount</th>
-              <th class="pb-2 font-bold text-slate-700">Exchange Rate</th>
-              <th class="pb-2 font-bold text-slate-700">Converted Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (transaction of transactions; track transaction.currencyCode) {
-            <tr>
-              <td class="font-medium py-3 text-slate-600">
-                {{ transaction.previousAmount }}
-                <span class="font-bold">{{
-                  transaction.previousCurrency
-                }}</span>
-              </td>
-              <td class="font-medium py-3 text-slate-600">
-                {{ transaction.exchangeRate }}
-              </td>
-              <td class="font-medium py-3 text-slate-600">
-                {{ transaction.convertedAmount }}
-                <span class="font-bold">{{ transaction.currencyCode }}</span>
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table>
+        <div class="flex flex-col">
+          <div class="overflow-x-auto sm:-mx-6">
+            <div class="inline-block min-w-full sm:px-6">
+              <div class="overflow-hidden">
+                <table class="w-full text-center border border-collapse border-slate-400 text-sm">
+                  <thead class="bg-slate-50">
+                    <tr>
+                      <th class="p-2 w-1/3 font-bold text-slate-700 border border-slate-300">Origin Amount</th>
+                      <th class="p-2 w-1/3 font-bold text-slate-700 border border-slate-300">Exchange Rate</th>
+                      <th class="p-2 w-1/3 font-bold text-slate-700 border border-slate-300">Converted Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (transaction of transactions; track transaction.currencyCode) {
+                    <tr>
+                      <td class="font-medium py-3 text-slate-600 border border-slate-300">
+                        {{ transaction.previousAmount }}
+                        <span class="font-bold">{{
+                          transaction.previousCurrency
+                        }}</span>
+                      </td>
+                      <td class="font-medium py-3 text-slate-600 border border-slate-300">
+                        {{ transaction.exchangeRate }}
+                      </td>
+                      <td class="font-medium py-3 text-slate-600 border border-slate-300">
+                        {{ transaction.convertedAmount }}
+                        <span class="font-bold">{{ transaction.currencyCode }}</span>
+                      </td>
+                    </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="sm:col-span-6 justify-self-end">
         <button

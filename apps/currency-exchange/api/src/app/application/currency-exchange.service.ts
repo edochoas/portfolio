@@ -15,4 +15,12 @@ export class CurrencyExchangeService {
     const fileData = this.renderer.render(transactionDetails);
     return new StreamableFile(Buffer.from(fileData));
   }
+
+  findBestConversion(amount: number, currency: string){
+    return this.converter.findBestConversion(amount, currency);
+  }
+
+  getCurrencies() {
+    return this.converter.getAvailableCurrencies()
+  }
 }

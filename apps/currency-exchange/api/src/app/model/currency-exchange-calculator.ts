@@ -32,6 +32,24 @@ export class CurrencyExchangeCalculator {
     return transactionDetails;
   }
 
+  findBestConversion(amount: number, currency: string) {
+    const path = this.pathMap.get(currency);
+    return this.getConversionPath(path, amount);
+  }
+
+  getAvailableCurrencies() {
+    const currencyList = [];
+    this.conversionGraph.nodeMetadata.forEach((value, key) => {
+      if (key !== "CAD") {
+        currencyList.push({
+          currencyName: value.currencyName,
+          currencyCode: key
+        })
+      }
+    })
+    return currencyList;
+  }
+
   private formatConversionPath(path: GraphNode[]) {
     return path.map((node) => node.name).join('|');
   }
@@ -42,9 +60,33 @@ export class CurrencyExchangeCalculator {
   ): number {
     let convertedAmount = amount;
     for (const node of path) {
-      convertedAmount = node.weight * convertedAmount;
+      convertedAmount *= node.weight;
     }
     return convertedAmount;
+  }
+
+  private getConversionPath( path: GraphNode[], amount: number) {
+    const conversionPath = [];
+    let convertedAmount = amount;
+    let previousAmount = amount;
+    let previousCurrency = 'CAD';
+
+    for (const node of path) {
+      convertedAmount *= node.weight;
+      conversionPath.push({
+        previousAmount,
+        previousCurrency,
+        currencyCode: node.name,
+        exchangeRate: node.weight,
+        convertedAmount: convertedAmount
+      });
+      previousAmount = convertedAmount
+      previousCurrency = node.name
+    }
+    return {
+      amount: convertedAmount,
+      path: conversionPath
+    }
   }
 
   private getCountryForCurrency(currency: string) {

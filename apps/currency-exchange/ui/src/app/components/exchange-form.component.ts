@@ -51,6 +51,7 @@ export class ExchangeFormComponent implements OnInit {
   }
 
   private setupSearchSubscription() {
+
     this.searchSubject.pipe(debounceTime(500)).subscribe(() => {
       this.makeConversion();
     });
